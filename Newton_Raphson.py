@@ -29,6 +29,6 @@ def operationNR(a,error):
         step = step + 1
 
 operationNR(a,error)
-print("Semua pemrograman ini dibuat secara orisinil oleh MUHAMMAD HURRICANE 1906356191")
+print("Semua pemrograman ini dibuat secara orisinil oleh M. Hurricane")
 
         
