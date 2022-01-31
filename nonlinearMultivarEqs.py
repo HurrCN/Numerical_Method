@@ -5,43 +5,35 @@ Mechanical Engineering, University of Indonesia
 from sympy import symbols, diff
 # declare involved variables
 x, y = symbols('x y')
-# menyatakan persamaan2 yang dibutuhkan u/ rooting
+# declare eqs that are required in the calculation
 f1_eqs = x**2 + 2*x + 2*y**2 - 26
 f2_eqs = 2*x**3 - y**2 + 4*y - 19
-# Turunan parsial thd x
+# Partial derivative of f1 and f2 respect to x
 df1dx_eqs = diff(f1_eqs,x)
 df2dx_eqs = diff(f2_eqs,x)
-# Turunan parsial thd y
+# Partial derivative of f1 and f2 respect to y
 df1dy_eqs = diff(f1_eqs,y)
 df2dy_eqs = diff(f2_eqs,y)
 
 '''
-CATATAN HURRICANE : LAMBDIFY
-Persamaan yang dinyatakan di atas hanya dianggap sbg var
-yang membungkus var-var lainnya, bukan dianggap sbg fungsi.
-Agar bisa dianggap sbg fungsi dan bisa diisi dengan var bebas
-berapapun yang kita mau, maka harus lambdify.
-
-Syntax lambdify adalah 
->> pers_converted = sympy.lambdify([var1,var2,...],persamaan)
+Syntax :
+>> converted_Eq = sympy.lambdify([var1,var2,...],Eq)
 '''
-# Diubah ke dalam bentuk fungsi yang dapat dipakai
+# Transformed into usable eqs
 from sympy import lambdify
-# Lambdify persamaan f1
 f1 = lambdify([x,y],f1_eqs)
 df1dx = lambdify([x,y],df1dx_eqs)
 df1dy = lambdify([x,y],df1dy_eqs)
-# Lambdify persamaan f2
 f2 = lambdify([x,y],f2_eqs)
 df2dx = lambdify([x,y],df2dx_eqs)
 df2dy = lambdify([x,y],df2dy_eqs)
 
-# Definisi sistem persamaan utama
-def Fungsi(x,y):
+# Let's define the main function
+def Func(x,y):
     return [f1(x,y),
             f2(x,y)]
 
-# Persamaan Jacobian = Turunan parsial persamaan utama
+# Jacobian Eqs = Define all partial derivatives in one place
 def Jacob(x,y):
     return [[df1dx(x,y), df1dy(x,y)],
             [df2dx(x,y), df2dy(x,y)]]
